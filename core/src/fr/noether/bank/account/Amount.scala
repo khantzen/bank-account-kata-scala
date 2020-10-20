@@ -1,9 +1,9 @@
 package fr.noether.bank.account
 
-class Amount(value: BigDecimal)
+case class Amount(value: BigDecimal)
 
 object Amount {
-  def of(value: BigDecimal) = new Amount(new BigDecimal(java.math.BigDecimal.ZERO))
+  def of(value: Double) = new Amount(BigDecimal.valueOf(value))
 
   val ZERO = Amount.of(0)
 

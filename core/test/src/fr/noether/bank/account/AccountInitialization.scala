@@ -12,6 +12,21 @@ class AccountInitialization extends AnyFunSpec with GivenWhenThen {
       Then("This account amount should be 0")
         assert(bankAccount.amount == Amount.ZERO)
     }
+
+    it("Account with given amount 7527.75 should start with amount of 7527.75") {
+      Given("Amount with amount 7527.75")
+        val bankAccount = BankAccount.startsWith(Amount.of(7527.75))
+      Then("This account Amount should be 7527.75")
+        assert(bankAccount.amount == Amount.of(7527.75))
+    }
+
+    it("Account with given amount 852.21 should start with amount of 852.21") {
+      Given("Amount with amount 852.21 ")
+      val bankAccount = BankAccount.startsWith(Amount.of(852.21))
+      Then("This account Amount should be 852.21")
+      assert(bankAccount.amount == Amount.of(852.21))
+    }
+
   }
 
 }
