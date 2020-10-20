@@ -26,7 +26,5 @@ class AccountInitialization extends AnyFunSpec with GivenWhenThen {
       Then("This account Amount should be 852.21")
       assert(bankAccount.amount == Amount.of(852.21))
     }
-
   }
-
 }
