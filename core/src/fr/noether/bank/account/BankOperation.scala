@@ -4,7 +4,7 @@ sealed trait BankOperation {
   val apply: Amount => Amount
 }
 
-case class Deposit(amount: Amount) extends BankOperation {
+case class Deposit(amount: Amount, operationDate: OperationDate) extends BankOperation {
   override val apply: Amount => Amount = x => x.add(amount)
 }
 

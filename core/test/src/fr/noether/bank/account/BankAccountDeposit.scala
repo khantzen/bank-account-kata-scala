@@ -12,7 +12,7 @@ class BankAccountDeposit
       Given("A bank account starting at 1251.27")
       var bankAccount = BankAccount.startsWith(Amount.of(1251.27))
       When("A deposit of 232.14 is made")
-      bankAccount = bankAccount.deposit(Amount.of(232.14))
+      bankAccount = bankAccount.deposit(Amount.of(232.14), OperationDate.now())
       Then("Account balance should be at 1483.40")
       assert(bankAccount.total() == Amount.of(1483.41))
     }
@@ -21,7 +21,7 @@ class BankAccountDeposit
       Given("A bank account of 7586.21")
       var bankAccount = BankAccount.startsWith(Amount.of(7586.21))
       When("A deposit of 120.21 is made")
-      bankAccount = bankAccount.deposit(Amount.of(120.21))
+      bankAccount = bankAccount.deposit(Amount.of(120.21), OperationDate.now())
       Then("Account balance should be at 7706.42")
       assert(bankAccount.total() == Amount.of(7706.42))
     }
@@ -32,7 +32,7 @@ class BankAccountDeposit
       Given("A freshly created bank account")
       var bankAccount = BankAccount.startsWith(Amount.of(100))
       When("A deposit of 100 is made")
-      bankAccount = bankAccount.deposit(Amount.of(100))
+      bankAccount = bankAccount.deposit(Amount.of(100), OperationDate.now())
       Then("Historic should not be empty")
       assert(!bankAccount.historicIsEmpty)
     }
@@ -41,22 +41,23 @@ class BankAccountDeposit
       Given("A bank account")
       var bankAccount = BankAccount.freshAccount()
       When("A deposit of 100 is made")
-      bankAccount = bankAccount.deposit(Amount.of(100))
+      bankAccount = bankAccount.deposit(Amount.of(100), OperationDate.from("2020-12-02 14:55:23"))
       Then("Historic should contains this operation")
-      assert(bankAccount.historic.contains(Deposit(Amount.of(100))))
+      assert(bankAccount.historic.contains(Deposit(Amount.of(100), OperationDate.from("2020-12-02 14:55:23"))))
     }
 
     it("When multiple deposit are made they should appears in the bank account historic") {
       Given("A bank account")
       var bankAccount = BankAccount.freshAccount()
       When("Three deposit of 100, 150, 200 are made")
-      bankAccount = bankAccount.deposit(Amount.of(100))
-      bankAccount = bankAccount.deposit(Amount.of(150))
-      bankAccount = bankAccount.deposit(Amount.of(200))
+      bankAccount = bankAccount.deposit(Amount.of(100), OperationDate.from("2019-07-21 14:32:45"))
+      bankAccount = bankAccount.deposit(Amount.of(150), OperationDate.from("2019-07-25 14:33:45"))
+      bankAccount = bankAccount.deposit(Amount.of(200), OperationDate.from("2019-07-27 14:37:45"))
       Then("Historic should contains this operation")
-      assert(bankAccount.historic.contains(Deposit(Amount.of(100))))
-      assert(bankAccount.historic.contains(Deposit(Amount.of(150))))
-      assert(bankAccount.historic.contains(Deposit(Amount.of(200))))
+      assert(bankAccount.historic.contains(Deposit(Amount.of(100), OperationDate.from("2019-07-21 14:32:45"))))
+      assert(bankAccount.historic.contains(Deposit(Amount.of(150), OperationDate.from("2019-07-25 14:33:45"))))
+      assert(bankAccount.historic.contains(Deposit(Amount.of(200), OperationDate.from("2019-07-27 14:37:45"))))
     }
   }
+
 }
