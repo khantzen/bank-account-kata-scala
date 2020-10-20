@@ -6,11 +6,11 @@ case class BankAccount(balance: Amount, historic: BankHistoric) {
   def deposit(amount: Amount): BankAccount = applyOperation(Deposit(amount))
 
   def applyOperation(operation: BankOperation): BankAccount =
-    new BankAccount(operation.apply(balance), historic.append(operation))
+    new BankAccount(balance, historic.append(operation))
 
   def historicIsEmpty: Boolean = historic.isEmpty
 
-  def total(): Amount = balance
+  def total(): Amount = historic.totalAmount(balance)
 }
 
 object BankAccount {
