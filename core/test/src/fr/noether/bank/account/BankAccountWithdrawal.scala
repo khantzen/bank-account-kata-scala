@@ -26,4 +26,37 @@ class BankAccountWithdrawal
       assert(bankAccount.total() == Amount.of(1988.99))
     }
   }
+
+  describe("Withdrawals should be registered in the account historic") {
+    it("Freshly created Bank account should not be empty after receiving a withdrawal") {
+      Given("A freshly created bank account")
+      var bankAccount = BankAccount.startsWith(Amount.of(100))
+      When("A deposit of 100 is made")
+      bankAccount = bankAccount.withdraw(Amount.of(100))
+      Then("Historic should not be empty")
+      assert(!bankAccount.historicIsEmpty)
+    }
+
+    it("Bank account should contains a withdraw having been made in its historic") {
+      Given("A bank account")
+      var bankAccount = BankAccount.freshAccount()
+      When("A deposit of 100 is made")
+      bankAccount = bankAccount.withdraw(Amount.of(100))
+      Then("Historic should contains this operation")
+      assert(bankAccount.historic.contains(Withdrawal(Amount.of(100))))
+    }
+
+    it("When multiple deposit are made they should appears in the bank account historic") {
+      Given("A bank account")
+      var bankAccount = BankAccount.freshAccount()
+      When("Three withdraws of 100, 150, 200 are made")
+      bankAccount = bankAccount.withdraw(Amount.of(100))
+      bankAccount = bankAccount.withdraw(Amount.of(150))
+      bankAccount = bankAccount.withdraw(Amount.of(200))
+      Then("Historic should contains these operation")
+      assert(bankAccount.historic.contains(Withdrawal(Amount.of(100))))
+      assert(bankAccount.historic.contains(Withdrawal(Amount.of(150))))
+      assert(bankAccount.historic.contains(Withdrawal(Amount.of(200))))
+    }
+  }
 }

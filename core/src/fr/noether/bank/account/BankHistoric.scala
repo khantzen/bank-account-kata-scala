@@ -4,7 +4,7 @@ case class BankHistoric(operations: Seq[BankOperation]) {
   def append(operation: BankOperation): BankHistoric = new BankHistoric(operations ++ Seq(operation))
 
   def isEmpty: Boolean = operations.isEmpty
-  def contains(deposit: Deposit): Boolean = operations.contains(deposit)
+  def contains(deposit: BankOperation): Boolean = operations.contains(deposit)
 }
 
 object BankHistoric {
