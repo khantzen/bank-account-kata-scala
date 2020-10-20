@@ -1,7 +1,7 @@
 package fr.noether.bank.account
 
 case class BankAccount(balance: Amount, historic: BankHistoric) {
-  def withdraw(amount: Amount): BankAccount = applyOperation(Withdrawal(amount))
+  def withdraw(amount: Amount, date: OperationDate): BankAccount = applyOperation(Withdrawal(amount, date))
 
   def deposit(amount: Amount): BankAccount = applyOperation(Deposit(amount))
 
