@@ -1,9 +1,7 @@
 package fr.noether.bank.account
 
-import scala.math.BigDecimal.RoundingMode
-
-
 case class Amount(value: BigDecimal) {
+  def remove(amount: Amount): Amount = Amount(value.-(amount.value))
   def add(amount: Amount): Amount = Amount(amount.value.+(value))
 
 }
