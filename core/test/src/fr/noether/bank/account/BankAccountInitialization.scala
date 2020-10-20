@@ -3,7 +3,9 @@ package fr.noether.bank.account
 import org.scalatest.GivenWhenThen
 import org.scalatest.funspec.AnyFunSpec
 
-class BankAccountInitialization extends AnyFunSpec with GivenWhenThen {
+class BankAccountInitialization
+  extends AnyFunSpec
+    with GivenWhenThen {
 
   describe("An account should start with an initiated amount") {
     it("Account with 0 should start at 0") {
