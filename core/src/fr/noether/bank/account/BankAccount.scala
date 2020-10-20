@@ -1,9 +1,15 @@
 package fr.noether.bank.account
 
 case class BankAccount(balance: Amount) {
-  def withdraw(amount: Amount): BankAccount = new BankAccount(balance.remove(amount))
+  def withdraw(amount: Amount): BankAccount = applyOperation(Withdrawal(amount))
 
-  def deposit(amount: Amount): BankAccount = new BankAccount(balance.add(amount))
+  def deposit(amount: Amount): BankAccount = applyOperation(Deposit(amount))
+
+  def applyOperation(operation: BankOperation): BankAccount =
+    new BankAccount(operation.apply(balance))
+
+
+
   def total(): Amount = balance
 }
 
