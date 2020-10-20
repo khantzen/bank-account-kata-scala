@@ -1,6 +1,12 @@
 package fr.noether.bank.account
 
-case class Amount(value: BigDecimal)
+import scala.math.BigDecimal.RoundingMode
+
+
+case class Amount(value: BigDecimal) {
+  def add(amount: Amount): Amount = Amount(amount.value.+(value))
+
+}
 
 object Amount {
   val ZERO: Amount = Amount.of(0)

@@ -1,7 +1,7 @@
 package fr.noether.bank.account
 
 case class BankAccount(balance: Amount) {
-  def deposit(amount: Amount): BankAccount = new BankAccount(Amount.of(1483.40))
+  def deposit(amount: Amount): BankAccount = new BankAccount(balance.add(amount))
   def total(): Amount = balance
 }
 
