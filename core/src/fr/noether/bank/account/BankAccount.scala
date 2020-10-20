@@ -8,8 +8,6 @@ case class BankAccount(balance: Amount) {
   def applyOperation(operation: BankOperation): BankAccount =
     new BankAccount(operation.apply(balance))
 
-
-
   def total(): Amount = balance
 }
 
