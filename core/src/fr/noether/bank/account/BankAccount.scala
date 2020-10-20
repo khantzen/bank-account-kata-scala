@@ -1,6 +1,8 @@
 package fr.noether.bank.account
 
-case class BankAccount(startAmount: Amount)
+case class BankAccount(balance: Amount) {
+  def total(): Amount = balance
+}
 
 object BankAccount {
   def startsWith(amount: Amount): BankAccount = BankAccount(amount)
