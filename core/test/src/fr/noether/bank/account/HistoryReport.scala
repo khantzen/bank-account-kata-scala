@@ -1,5 +1,6 @@
 package fr.noether.bank.account
 
+import fr.noether.bank.account.operation.{OperationDate, OperationType}
 import org.scalatest.GivenWhenThen
 import org.scalatest.funspec.AnyFunSpec
 

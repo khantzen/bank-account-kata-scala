@@ -1,5 +1,6 @@
 package fr.noether.bank.account
 
+import fr.noether.bank.account.operation.{Deposit, OperationDate}
 import org.scalatest.GivenWhenThen
 import org.scalatest.funspec.AnyFunSpec
 
@@ -54,9 +55,9 @@ class BankAccountDeposit
       bankAccount = bankAccount.deposit(Amount.of(150), OperationDate.from("2019-07-25 14:33:45"))
       bankAccount = bankAccount.deposit(Amount.of(200), OperationDate.from("2019-07-27 14:37:45"))
       Then("Historic should contains this operation")
-      assert(bankAccount.historic.contains(Deposit(Amount.of(100), OperationDate.from("2019-07-21 14:32:45"))))
-      assert(bankAccount.historic.contains(Deposit(Amount.of(150), OperationDate.from("2019-07-25 14:33:45"))))
-      assert(bankAccount.historic.contains(Deposit(Amount.of(200), OperationDate.from("2019-07-27 14:37:45"))))
+      assert(bankAccount.historic.contains(operation.Deposit(Amount.of(100), OperationDate.from("2019-07-21 14:32:45"))))
+      assert(bankAccount.historic.contains(operation.Deposit(Amount.of(150), OperationDate.from("2019-07-25 14:33:45"))))
+      assert(bankAccount.historic.contains(operation.Deposit(Amount.of(200), OperationDate.from("2019-07-27 14:37:45"))))
     }
   }
 

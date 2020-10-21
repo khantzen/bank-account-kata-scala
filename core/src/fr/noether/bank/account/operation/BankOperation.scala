@@ -1,6 +1,7 @@
-package fr.noether.bank.account
+package fr.noether.bank.account.operation
 
-import fr.noether.bank.account.OperationType.OperationType
+import OperationType.OperationType
+import fr.noether.bank.account.Amount
 
 sealed trait BankOperation {
   val apply: Amount => Amount

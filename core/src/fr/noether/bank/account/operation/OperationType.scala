@@ -1,4 +1,4 @@
-package fr.noether.bank.account
+package fr.noether.bank.account.operation
 
 object OperationType extends Enumeration {
   type OperationType = Value

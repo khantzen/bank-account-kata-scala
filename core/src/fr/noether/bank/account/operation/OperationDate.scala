@@ -1,4 +1,4 @@
-package fr.noether.bank.account
+package fr.noether.bank.account.operation
 
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter

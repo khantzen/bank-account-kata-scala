@@ -1,5 +1,7 @@
 package fr.noether.bank.account
 
+import fr.noether.bank.account.operation.BankOperation
+
 case class BankHistoric(operations: Seq[BankOperation]) {
   def append(operation: BankOperation): BankHistoric = new BankHistoric(operations ++ Seq(operation))
 
