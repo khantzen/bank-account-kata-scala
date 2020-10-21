@@ -1,4 +1,6 @@
-package fr.noether.bank.account
+package fr.noether.bank.account.reporting
+
+import fr.noether.bank.account.Amount
 
 case class BankReport(initialBalance: Amount, entries: Seq[ReportEntry]) {
   def lastAmount(): Amount = entries match {
