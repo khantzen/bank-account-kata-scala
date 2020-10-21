@@ -16,11 +16,45 @@ class HistoryReport
         .deposit(Amount.of(150), OperationDate.from("2020-10-14 22:32:34"))
         .deposit(Amount.of(250), OperationDate.from("2020-10-22 23:33:35"))
       Then("Report should contains the two deposits with their date and amount at that moment")
-      val expectedReport = BankReport.empty()
+      val expectedReport = BankReport.withInitialAmount(Amount.of(100))
         .append(ReportEntry(OperationType.DEPOSIT, OperationDate.from("2020-10-14 22:32:34"), Amount.of(150), Amount.of(250)))
         .append(ReportEntry(OperationType.DEPOSIT, OperationDate.from("2020-10-22 23:33:35"), Amount.of(250), Amount.of(500)))
 
       assert(bankAccount.report() == expectedReport)
     }
+
+    it("A bank account with withdrawals and deposit") {
+      Given("A bank account starting with 1000")
+      var bankAccount = BankAccount.startsWith(Amount.of(1000))
+      When("Operation are made")
+      bankAccount = bankAccount
+        .withdraw(Amount.of(1500), OperationDate.from("2020-10-10 21:32:15"))
+        .deposit(Amount.of(1100), OperationDate.from("2020-10-11 12:12:12"))
+      Then("Report should contains the operations with their date and amount at that moment")
+      val expectedReport = BankReport.withInitialAmount(Amount.of(1000))
+        .append(ReportEntry(OperationType.WITHDRAWAL, OperationDate.from("2020-10-10 21:32:15"),
+          Amount.of(1500), Amount.of(-500)))
+        .append(ReportEntry(OperationType.DEPOSIT, OperationDate.from("2020-10-11 12:12:12"), Amount.of(1100), Amount.of(600)))
+
+      assert(bankAccount.report() == expectedReport)
+    }
+
+    it("Bank report should refer on the operation date to calculate the different amounts") {
+      Given("A bank account starting with 100")
+      var bankAccount = BankAccount.startsWith(Amount.of(1000))
+      When("Deposit and withdraw are stored made with non sorted date")
+      bankAccount = bankAccount
+        .deposit(Amount.of(150), OperationDate.from("2020-10-09 20:32:10"))
+        .withdraw(Amount.of(120), OperationDate.from("2013-10-09 20:32:10"))
+        .deposit(Amount.of(500), OperationDate.from("2015-10-09 20:32:10"))
+      Then("Report should contains the operation in the correct order following operation date")
+      val expectedReport = BankReport.withInitialAmount(Amount.of(1000))
+        .append(ReportEntry(OperationType.WITHDRAWAL, OperationDate.from("2013-10-09 20:32:10"), Amount.of(120), Amount.of(880)))
+        .append(ReportEntry(OperationType.DEPOSIT, OperationDate.from("2015-10-09 20:32:10"), Amount.of(500), Amount.of(1380)))
+        .append(ReportEntry(OperationType.DEPOSIT, OperationDate.from("2020-10-09 20:32:10"), Amount.of(150), Amount.of(1530)))
+
+      assert(bankAccount.report() == expectedReport)
+    }
+
   }
 }
