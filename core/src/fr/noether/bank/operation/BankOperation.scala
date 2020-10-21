@@ -1,4 +1,4 @@
-package fr.noether.bank.account.operation
+package fr.noether.bank.operation
 
 import OperationType.OperationType
 import fr.noether.bank.account.Amount

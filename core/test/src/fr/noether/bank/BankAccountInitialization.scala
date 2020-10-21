@@ -1,5 +1,6 @@
-package fr.noether.bank.account
+package fr.noether.bank
 
+import fr.noether.bank.account.{Amount, BankAccount}
 import org.scalatest.GivenWhenThen
 import org.scalatest.funspec.AnyFunSpec
 

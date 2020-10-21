@@ -1,4 +1,4 @@
-package fr.noether.bank.account.reporting
+package fr.noether.bank.reporting
 
 import fr.noether.bank.account.Amount
 

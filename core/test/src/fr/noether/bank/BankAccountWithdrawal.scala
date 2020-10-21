@@ -1,6 +1,7 @@
-package fr.noether.bank.account
+package fr.noether.bank
 
-import fr.noether.bank.account.operation.{OperationDate, Withdrawal}
+import fr.noether.bank.account.{Amount, BankAccount}
+import fr.noether.bank.operation.{OperationDate, Withdrawal}
 import org.scalatest.GivenWhenThen
 import org.scalatest.funspec.AnyFunSpec
 
