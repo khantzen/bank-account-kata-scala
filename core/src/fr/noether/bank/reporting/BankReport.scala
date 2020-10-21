@@ -10,6 +10,10 @@ case class BankReport(initialBalance: Amount, entries: Seq[ReportEntry]) {
 
   def append(entry: ReportEntry): BankReport = BankReport(initialBalance, entries ++ Seq(entry))
 
+  override def toString: String = entries
+    .foldLeft(new StringBuilder("Operation Type|Date|Amount|Balance\r\n"))((acc, entry) =>
+      acc.append(entry.toString).append("\r\n")
+    ).toString()
 }
 
 object BankReport {

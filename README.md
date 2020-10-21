@@ -19,4 +19,7 @@ mill core.compile
 
 # Run test
 mill core.test
+
+# Run démo
+mill core.run
 ```

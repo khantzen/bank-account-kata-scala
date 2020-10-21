@@ -4,6 +4,7 @@ case class Amount(value: BigDecimal) {
   def remove(amount: Amount): Amount = Amount(value.-(amount.value))
   def add(amount: Amount): Amount = Amount(amount.value.+(value))
 
+  override def toString: String = value.setScale(2).toString()
 }
 
 object Amount {
